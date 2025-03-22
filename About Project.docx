@@ -1,0 +1,21 @@
+Project Title: restaurant-bill-generation-application
+
+Description:
+
+This project implements a restaurant ordering system using Python, SQLite, and customtkinter.
+
+Python: Handles the application's logic, including data retrieval and manipulation.
+SQLite: Stores persistent data for menu items, order history, and restaurant information.
+Customtkinter: Provides a user-friendly graphical interface for menu browsing and cart management.
+
+
+Key Features:
+
+Interactive menu display.
+Real-time cart management.
+Order history tracking.
+Restaurant information display.
+Technical Details:
+
+The Python code interacts with the SQLite database to fetch and update data.
+Customtkinter is used to create a responsive and intuitive user interface.
