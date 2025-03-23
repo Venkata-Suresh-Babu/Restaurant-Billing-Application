@@ -4,7 +4,10 @@ import restaurant_database as database
 from menu import menu_card
 from cart import shoppingCart
 from bill import generate_bill_text
+from orders_details import save_as_csv, fetch_order_data
+import os
 from datetime import datetime
+
 import random # For generating token numbers
 
 class RestaurantApp(ctk.CTk):
@@ -84,8 +87,8 @@ class RestaurantApp(ctk.CTk):
         total_amount = self.shopping_cart.get_total_price()
         if not cart_items:
             return
-        token_number = random.randint(1000, 9999) # Generate a random token number
-        order_date = datetime.now().isoformat() # Get current date and time
+        token_number = random.randint(1, 1000) # Generate a random token number
+        order_date = datetime.now().isoformat() # Get the current date and time
 
         #Save order to database
         database.save_order(token_number, order_date, total_amount, cart_items)
@@ -110,6 +113,16 @@ class RestaurantApp(ctk.CTk):
         for card in self.menu_cards:
             card.quantity = 0
             card.quantity_display.configure(text = "0")
+        
+        # Save order details to CSV
+        self.save_order_details()
+
+    def save_order_details(self):
+        orders = fetch_order_data()
+        if orders:
+            save_as_csv(orders)
+        else:
+            print("No order data found to save.")
 
 if __name__ == "__main__":
     database.initialize_database()
